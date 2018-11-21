@@ -18,18 +18,8 @@ namespace QL_SV.Report
         private void Frpt_DanhSachDongHP_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false;
+            this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.lOPTableAdapter.Fill(this.DS.LOP);
-      
-            if (Program.KetNoi() == 0)
-                MessageBox.Show("Lỗi kết nối về khoa mới", "", MessageBoxButtons.OK);
-            else
-            {
-                this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
-                this.lOPTableAdapter.Fill(DS.LOP);
-                cmbTenLop.DataSource = bdsLOP;
-                cmbTenLop.DisplayMember = "TENLOP";
-                cmbTenLop.ValueMember = "MALOP";
-            }
             txtMaLop.Text = cmbTenLop.SelectedValue.ToString();
             cmbHocKy.SelectedIndex = 0;
         }

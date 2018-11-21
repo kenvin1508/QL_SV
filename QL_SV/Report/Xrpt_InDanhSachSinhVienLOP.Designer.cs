@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -44,7 +45,7 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource();
+            this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this.reportHeaderBand1 = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.lblTenLop = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
@@ -151,7 +152,7 @@
             this.xrTableCell8.StylePriority.UseBorders = false;
             this.xrTableCell8.StylePriority.UseBorderWidth = false;
             this.xrTableCell8.Text = "xrTableCell8";
-            this.xrTableCell8.Weight = 0.065866353836285529D;
+            this.xrTableCell8.Weight = 0.10272529037746542D;
             // 
             // xrTableCell9
             // 
@@ -164,7 +165,7 @@
             this.xrTableCell9.StylePriority.UseTextAlignment = false;
             this.xrTableCell9.Text = "xrTableCell9";
             this.xrTableCell9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell9.Weight = 0.13774280254657451D;
+            this.xrTableCell9.Weight = 0.10088386600539462D;
             // 
             // xrCheckBox1
             // 
@@ -180,7 +181,7 @@
             this.xrCheckBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrCheckBox1.Name = "xrCheckBox1";
             this.xrCheckBox1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrCheckBox1.SizeF = new System.Drawing.SizeF(89.53282F, 25F);
+            this.xrCheckBox1.SizeF = new System.Drawing.SizeF(65.57452F, 25F);
             this.xrCheckBox1.StylePriority.UseBorderColor = false;
             this.xrCheckBox1.StylePriority.UseBorders = false;
             this.xrCheckBox1.StylePriority.UseBorderWidth = false;
@@ -431,7 +432,7 @@
             this.xrTableCell2.StylePriority.UseTextAlignment = false;
             this.xrTableCell2.Text = "Tên";
             this.xrTableCell2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell2.Weight = 0.065866359742669217D;
+            this.xrTableCell2.Weight = 0.10272530061017793D;
             // 
             // xrTableCell3
             // 
@@ -452,7 +453,7 @@
             this.xrTableCell3.StylePriority.UseTextAlignment = false;
             this.xrTableCell3.Text = "Phái";
             this.xrTableCell3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell3.Weight = 0.13774281428410456D;
+            this.xrTableCell3.Weight = 0.10088387341659585D;
             // 
             // xrTableCell4
             // 
@@ -596,7 +597,7 @@
             // 
             this.dIEMTableAdapter.ClearBeforeFill = true;
             // 
-            // Xrpt_InDanhSachNhanVienLOP
+            // Xrpt_InDanhSachSinhVienLOP
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.Detail,

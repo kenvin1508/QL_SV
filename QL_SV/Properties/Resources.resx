@@ -124,8 +124,8 @@
   <data name="Save-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Save-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Login-32-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Image\Login-32-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_Spam_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Spam_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Exit-24-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Exit-24-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -154,11 +154,14 @@
   <data name="Button-Add-24-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Button-Add-24-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_Student_Male_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Student_Male_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Delete-2-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Delete-2-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_Spam_48px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Image\icons8_Spam_48px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Button-Refresh-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\Button-Refresh-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Text-Edit-icon-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Text-Edit-icon-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,11 +172,14 @@
   <data name="Undo-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\Undo-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icons8_Money_Bag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Money_Bag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icons8_Circled_Play_24px_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\icons8_Circled_Play_24px_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Button-Refresh-icon-24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Image\Button-Refresh-icon-24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Login-32-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\Login-32-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icons8_Shutdown_24px_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\icons8_Shutdown_24px_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -184,7 +190,19 @@
   <data name="icons8_Play_40px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Image\icons8_Play_40px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icons8_Money_Bag_24px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Image\icons8_Money_Bag_24px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icons8_Elective_25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Elective_25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Graduation_Cap_25px_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Graduation_Cap_25px_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Money_25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Money_25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Rating_25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Rating_25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icons8_Report_Card_25px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Image\icons8_Report_Card_25px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

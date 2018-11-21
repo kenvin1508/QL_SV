@@ -44,6 +44,7 @@
             this.tableAdapterManager = new QL_SV.QL_SVDataSetTableAdapters.TableAdapterManager();
             this.label4 = new System.Windows.Forms.Label();
             this.btnDontClick = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             tENCNLabel1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDSPhanManh)).BeginInit();
@@ -201,12 +202,29 @@
             this.btnDontClick.Location = new System.Drawing.Point(1107, 253);
             this.btnDontClick.Margin = new System.Windows.Forms.Padding(4);
             this.btnDontClick.Name = "btnDontClick";
-            this.btnDontClick.Size = new System.Drawing.Size(228, 60);
+            this.btnDontClick.Size = new System.Drawing.Size(238, 60);
             this.btnDontClick.TabIndex = 3;
             this.btnDontClick.Text = "DON\'T CLICK";
             this.btnDontClick.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDontClick.UseVisualStyleBackColor = false;
             this.btnDontClick.Click += new System.EventHandler(this.btnDontClick_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Yellow;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Red;
+            this.button1.Image = global::QL_SV.Properties.Resources.icons8_Spam_48px;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(1107, 329);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(238, 60);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "DO NOT CLICK";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmDangNhap
             // 
@@ -214,6 +232,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1370, 721);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnDontClick);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
@@ -248,5 +267,6 @@
         public System.Windows.Forms.TextBox txtLoginName;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnDontClick;
+        private System.Windows.Forms.Button button1;
     }
 }

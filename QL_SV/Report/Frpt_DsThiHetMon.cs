@@ -20,32 +20,22 @@ namespace QL_SV.Report
 
         private void Frpt_PhieuDiemThi_Load(object sender, EventArgs e)
         {
-            DS.EnforceConstraints = false;
-            this.mONHOCTableAdapter.Fill(this.DS.MONHOC);
+            DS.EnforceConstraints = false;           
+            this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.lOPTableAdapter.Fill(this.DS.LOP);
+            this.mONHOCTableAdapter.Fill(this.DS.MONHOC);
+            cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
+            cmbKhoa.DisplayMember = "TENCN";
+            cmbKhoa.ValueMember = "TENSERVER";
+            cmbKhoa.SelectedIndex = Program.mKhoa;
+
             if (Program.mGroup == "PGV")
             {
-                Program.servername = @"VTN\VTN";
-                Program.mlogin = Program.remotelogin;
-                Program.password = Program.remotepassword;
+                cmbKhoa.Enabled = true;  // bật tắt theo phân quyền
             }
-            if (Program.mGroup == "KHOA" && Program.mKhoa == 0)
-            {
-                Program.servername = @"VTN\VTN1";
-            }
-            if (Program.mGroup == "KHOA" && Program.mKhoa == 2)
-            {
-                Program.servername = @"VTN\VTN2";
-            }
-            if (Program.KetNoi() == 0)
-                MessageBox.Show("Lỗi kết nối về Khoa mới", "", MessageBoxButtons.OK);
             else
             {
-                this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
-                this.lOPTableAdapter.Fill(this.DS.LOP);
-                cmbTenLop.DataSource = bdsLOP;  // sao chép bds_dspm đã load ở form đăng nhập  qua
-                cmbTenLop.DisplayMember = "TENLOP";
-                cmbTenLop.ValueMember = "MALOP";
+                cmbKhoa.Enabled = false;
             }
 
             txtMaLop.Text = cmbTenLop.SelectedValue.ToString();
@@ -87,6 +77,41 @@ namespace QL_SV.Report
             rpt.lblNgayThi.Text = dtpNgayThi.Text;
             rpt.CreateDocument();
             documentViewer1.DocumentSource = rpt;
+        }
+
+        private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbKhoa.SelectedValue != null)
+            {
+                if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+                    return; // Hệ thống chưa chọn đã chạy => Kết thúc
+                Program.servername = cmbKhoa.SelectedValue.ToString();
+                if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
+                    cmbKhoa.SelectedIndex = 1;
+                    cmbKhoa.SelectedIndex = 0;
+                    return;
+                }
+                if (cmbKhoa.SelectedIndex != Program.mKhoa)
+                {
+                    Program.mlogin = Program.remotelogin;
+                    Program.password = Program.remotepassword;
+                }
+                else
+                {
+                    Program.mlogin = Program.mloginDN;
+                    Program.password = Program.passwordDN;
+                }
+                if (Program.KetNoi() == 0)
+                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                else
+                {
+                    this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.lOPTableAdapter.Fill(this.DS.LOP);
+                    txtMaLop.Text = cmbTenLop.SelectedValue.ToString();
+                }
+            }
         }
     }
 }

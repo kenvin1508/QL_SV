@@ -28,8 +28,7 @@ namespace QL_SV
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false; // tắt ràng buộc khóa ngoại
-            this.sINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
-            this.lOPTableAdapter.Fill(this.DS.LOP);
+            reloadLopAndSV();
             cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbKhoa.DisplayMember = "TENCN";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -42,17 +41,17 @@ namespace QL_SV
             else
             {
                 cmbKhoa.Enabled = false;
-                //set lại dữ liệu khi không là PGV
-                Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.KetNoi() == 0)
-                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
-                else
-                {
-                    reloadLopAndSV(); // tải mới lại Lớp và sinh viên
-                    cmbMaLop.DataSource = bdsLOP;  // sao chép bds_dspm đã load ở form đăng nhập  qua
-                    cmbMaLop.DisplayMember = "TENLOP";
-                    cmbMaLop.ValueMember = "MALOP";
-                }
+                ////set lại dữ liệu khi không là PGV
+                //Program.servername = cmbKhoa.SelectedValue.ToString();
+                //if (Program.KetNoi() == 0)
+                //    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                //else
+                //{
+                //    reloadLopAndSV(); // tải mới lại Lớp và sinh viên
+                //    cmbMaLop.DataSource = bdsLOP;  // sao chép bds_dspm đã load ở form đăng nhập  qua
+                //    cmbMaLop.DisplayMember = "TENLOP";
+                //    cmbMaLop.ValueMember = "MALOP";
+                //}
                 btnThem.Enabled = btnXoa.Enabled = btnPhucHoi.Enabled = btnHieuChinh.Enabled = btnGhi.Enabled = btnTaiLai.Enabled = groupBox1.Enabled = dataGridView1.Enabled = false;
             }
              bdsSINHVIEN.Filter = string.Format("MALOP LIKE '" + cmbMaLop.SelectedValue.ToString() + "'"); // Lọc sinh viên với mã lớp       

@@ -26,12 +26,14 @@
             DS.EnforceConstraints = false; // tắt ràng buộc khóa ngoại
             this.dIEMTableAdapter.Fill(this.DS.DIEM);
             this.mONHOCTableAdapter.Fill(this.DS.MONHOC);
+            this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.lOPTableAdapter.Fill(this.DS.LOP);
 
             cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbKhoa.DisplayMember = "TENCN";
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mKhoa;
+
             if (Program.mGroup == "PGV")
             {
                 cmbKhoa.Enabled = true;  // bật tắt theo phân quyền
@@ -39,18 +41,6 @@
             else
             {
                 cmbKhoa.Enabled = false;
-                //set lại dữ liệu khi không là PGV
-                Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.KetNoi() == 0)
-                    MessageBox.Show("Lỗi kết nối về Khoa mới", "", MessageBoxButtons.OK);
-                else
-                {
-                    this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.lOPTableAdapter.Fill(this.DS.LOP);
-                    cmbMaLop.DataSource = bdsLOP;  // sao chép bds_dspm đã load ở form đăng nhập  qua
-                    cmbMaLop.DisplayMember = "MALOP";
-                    cmbMaLop.ValueMember = "TENLOP";
-                }
             }
             cmbLanThi.SelectedIndex = 0;
             txtTenLop.Text = cmbMaLop.SelectedValue.ToString();
@@ -137,6 +127,7 @@
 
         private void btnBatDau_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            kt = false; 
             if (cmbMaLop.Text == "" || cmbMaMon.Text == "" || cmbLanThi.SelectedIndex == -1)
             {
                 MessageBox.Show("Mã lớp hoặc mã môn hoặc lần thi bị trống");
@@ -202,78 +193,6 @@
             btnBatDau.Enabled = groupBox1.Enabled = cmbKhoa.Enabled = btnHieuChinh.Enabled = false;
         }
 
-        private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            if (kt == false) // ghi mới
-            {
-                using (SqlConnection con = new SqlConnection(Program.connstr))
-                {
-                    con.Open();
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
-                    da.InsertCommand = new SqlCommand("sp_InsertValueDiem", con);
-                    da.InsertCommand.CommandType = CommandType.StoredProcedure;
-
-                    da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
-                    da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
-                    da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
-                    da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
-
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "BANGDIEM");
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
-                        dataGridView1.EndEdit();
-                        DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
-                        newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                        newRow["mamh"] = cmbMaMon.Text;
-                        newRow["lan"] = cmbLanThi.SelectedItem;
-                        newRow["diem"] = dataGridView1.Rows[i].Cells[2].Value;
-                        ds.Tables["BANGDIEM"].Rows.Add(newRow);
-                    }
-                    da.Update(ds, "BANGDIEM");
-                    //xóa table dataGridView1 
-                    dataGridView1.DataSource = null;
-                    dataGridView1.Columns.Clear();
-                    con.Close();
-                }
-            }
-            if (kt == true) // Hiệu chỉnh
-            {
-                using (SqlConnection con = new SqlConnection(Program.connstr))
-                {
-                    con.Open();
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
-                    da.InsertCommand = new SqlCommand("sp_UpdateValueTableDiem", con);
-                    da.InsertCommand.CommandType = CommandType.StoredProcedure;
-
-                    da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
-                    da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
-                    da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
-                    da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
-
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "BANGDIEM");
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
-                        dataGridView1.EndEdit();
-                        DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
-                        newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                        newRow["mamh"] = cmbMaMon.Text;
-                        newRow["lan"] = cmbLanThi.SelectedItem;
-                        newRow["diem"] = dataGridView1.Rows[i].Cells[3].Value;
-                        ds.Tables["BANGDIEM"].Rows.Add(newRow);
-                    }
-                    da.Update(ds, "BANGDIEM");
-                    //xóa table dataGridView1 
-                    dataGridView1.DataSource = null;
-                    dataGridView1.Columns.Clear();
-                    con.Close();
-                }
-            }
-            btnGhi.Enabled = false;
-            btnBatDau.Enabled = groupBox1.Enabled = cmbKhoa.Enabled = btnHieuChinh.Enabled = true;
-        }
-
         private void btnHieuChinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             kt = true; // set btn GHI là HIỆU CHỈNH
@@ -314,7 +233,7 @@
                     dataGridView1.AutoGenerateColumns = true; // hiển thị các cột tương ứng với các trường dữ liệu có sẵn
                     dataGridView1.DataSource = ds;
                     dataGridView1.DataMember = "TableDiem";
-                    dataGridView1.Columns[0].HeaderText = "Mã sinh viên";
+                    dataGridView1.Columns[0].HeaderText = "Mã sinh viên - Họ và tên";
                     dataGridView1.Columns[0].ReadOnly = true;
                     dataGridView1.Columns[1].HeaderText = "Mã môn học";
                     dataGridView1.Columns[1].ReadOnly = true;
@@ -325,6 +244,115 @@
             }
             btnBatDau.Enabled = groupBox1.Enabled = btnHieuChinh.Enabled = cmbKhoa.Enabled = false;
             btnGhi.Enabled = true;
+        }
+        private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (kt == false) // ghi mới
+            {
+                using (SqlConnection con = new SqlConnection(Program.connstr))
+                {
+                    con.Open();
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
+                    da.InsertCommand = new SqlCommand("sp_InsertValueDiem", con);
+                    da.InsertCommand.CommandType = CommandType.StoredProcedure;
+
+                    da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
+                    da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
+                    da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
+                    da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
+
+                    DataSet ds = new DataSet();
+                    da.Fill(ds, "BANGDIEM");
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        dataGridView1.EndEdit();
+                        DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
+                        newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                        newRow["mamh"] = cmbMaMon.Text;
+                        newRow["lan"] = cmbLanThi.SelectedItem;
+                        if (IsDigitsOnly(dataGridView1.Rows[i].Cells[2].Value.ToString()) == false)
+                        {
+                            MessageBox.Show("Điểm chỉ từ 0 đến 10 và chỉ có số !! Vui lòng kiểm tra lại ");
+                            return;
+                        }
+                        float f = float.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                        if (f >= 0 && f <= 10)
+                        {
+                            newRow["diem"] = dataGridView1.Rows[i].Cells[2].Value;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Điểm chỉ từ 0 đến 10 !! Vui lòng kiểm tra lại ");
+                            return;
+                        }
+                        ds.Tables["BANGDIEM"].Rows.Add(newRow);
+                    }
+                    da.Update(ds, "BANGDIEM");
+                    //xóa table dataGridView1 
+                    dataGridView1.DataSource = null;
+                    dataGridView1.Columns.Clear();
+                    con.Close();
+                }
+            }
+            if (kt == true) // Hiệu chỉnh
+            {
+                using (SqlConnection con = new SqlConnection(Program.connstr))
+                {
+                    con.Open();
+                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
+                    da.InsertCommand = new SqlCommand("sp_UpdateValueTableDiem", con);
+                    da.InsertCommand.CommandType = CommandType.StoredProcedure;
+
+                    da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
+                    da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
+                    da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
+                    da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
+
+                    DataSet ds = new DataSet();
+                    da.Fill(ds, "BANGDIEM");
+                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                    {
+                        dataGridView1.EndEdit();
+                        DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
+                        newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
+                        newRow["mamh"] = cmbMaMon.Text;
+                        newRow["lan"] = cmbLanThi.SelectedItem;
+                        float f = float.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                        if (f>=0 && f<=10)
+                        {
+                            newRow["diem"] = dataGridView1.Rows[i].Cells[3].Value;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Điểm chỉ từ 0 đến 10 !! Vui lòng kiểm tra lại ");
+                            return;
+                        }
+                        ds.Tables["BANGDIEM"].Rows.Add(newRow);
+                    }
+                    da.Update(ds, "BANGDIEM");
+                    //xóa table dataGridView1 
+                    dataGridView1.DataSource = null;
+                    dataGridView1.Columns.Clear();
+                    con.Close();
+                }
+            }
+            btnGhi.Enabled = false;
+            btnBatDau.Enabled = groupBox1.Enabled = cmbKhoa.Enabled = btnHieuChinh.Enabled = true;
+        }
+        bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '.' || c > '9')
+                    return false;
+            }
+
+            return true;
+        }
+
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            MessageBox.Show("- Điểm nhập vào bị lỗi vui lòng kiểm tra lại !! \n" +"- " +e.Context.ToString());     
         }
     }
 }

@@ -40,6 +40,8 @@
             this.dIEMTableAdapter = new QL_SV.DSTableAdapters.DIEMTableAdapter();
             this.tableAdapterManager = new QL_SV.DSTableAdapters.TableAdapterManager();
             this.documentViewer1 = new DevExpress.XtraPrinting.Preview.DocumentViewer();
+            this.cmbKhoa = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bdsDIEM)).BeginInit();
@@ -59,6 +61,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cmbKhoa);
+            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.btnIn);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.txtMaSV);
@@ -66,13 +70,13 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(12, 206);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(391, 155);
+            this.panel1.Size = new System.Drawing.Size(397, 189);
             this.panel1.TabIndex = 6;
             // 
             // btnIn
             // 
             this.btnIn.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIn.Location = new System.Drawing.Point(198, 114);
+            this.btnIn.Location = new System.Drawing.Point(198, 150);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(79, 34);
             this.btnIn.TabIndex = 3;
@@ -83,15 +87,15 @@
             // txtMaSV
             // 
             this.txtMaSV.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaSV.Location = new System.Drawing.Point(160, 67);
+            this.txtMaSV.Location = new System.Drawing.Point(136, 103);
             this.txtMaSV.Name = "txtMaSV";
-            this.txtMaSV.Size = new System.Drawing.Size(147, 29);
+            this.txtMaSV.Size = new System.Drawing.Size(198, 29);
             this.txtMaSV.TabIndex = 2;
             // 
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(311, 113);
+            this.btnThoat.Location = new System.Drawing.Point(311, 149);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(75, 34);
             this.btnThoat.TabIndex = 4;
@@ -103,7 +107,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(50, 71);
+            this.label2.Location = new System.Drawing.Point(6, 111);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(104, 21);
             this.label2.TabIndex = 0;
@@ -127,6 +131,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.DIEMTableAdapter = this.dIEMTableAdapter;
+            this.tableAdapterManager.GIANGVIEN1TableAdapter = null;
             this.tableAdapterManager.GIANGVIENTableAdapter = null;
             this.tableAdapterManager.HOCPHITableAdapter = null;
             this.tableAdapterManager.KHOATableAdapter = null;
@@ -144,6 +149,27 @@
             this.documentViewer1.Size = new System.Drawing.Size(897, 566);
             this.documentViewer1.TabIndex = 7;
             // 
+            // cmbKhoa
+            // 
+            this.cmbKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKhoa.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbKhoa.FormattingEnabled = true;
+            this.cmbKhoa.Location = new System.Drawing.Point(136, 68);
+            this.cmbKhoa.Name = "cmbKhoa";
+            this.cmbKhoa.Size = new System.Drawing.Size(198, 27);
+            this.cmbKhoa.TabIndex = 16;
+            this.cmbKhoa.SelectedIndexChanged += new System.EventHandler(this.cmbKhoa_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 72);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 21);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Khoa";
+            // 
             // Frpt_PhieuDiemSV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -151,6 +177,7 @@
             this.ClientSize = new System.Drawing.Size(1370, 566);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.documentViewer1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.Name = "Frpt_PhieuDiemSV";
             this.Text = "Frpt_PhieuDiemSV";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -176,5 +203,7 @@
         private DSTableAdapters.DIEMTableAdapter dIEMTableAdapter;
         private DSTableAdapters.TableAdapterManager tableAdapterManager;
         private DevExpress.XtraPrinting.Preview.DocumentViewer documentViewer1;
+        private System.Windows.Forms.ComboBox cmbKhoa;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -41,7 +41,7 @@
                     int check = (int)cmd.Parameters["return_value"].Value;
                     if (check == 1)
                     {
-                        MessageBox.Show("Sinh viên đã nhập không tồn tại !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Sinh viên đã nhập không tồn tại !! \n Hoặc Sinh viên đó đã nghỉ học !! ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     con.Close();
@@ -75,9 +75,9 @@
                     dataGridView1.Columns[0].HeaderText = "Niên khóa";
                     dataGridView1.Columns[1].HeaderText = "Học kỳ";
                     dataGridView1.Columns[2].HeaderText = "Học phí";
-                    dataGridView1.Columns[2].DefaultCellStyle.Format = "#,####";
+                    dataGridView1.Columns[2].DefaultCellStyle.Format = "#,####0";
                     dataGridView1.Columns[3].HeaderText = "Số tiền đã đóng";
-                    dataGridView1.Columns[3].DefaultCellStyle.Format = "#,####";
+                    dataGridView1.Columns[3].DefaultCellStyle.Format = "#,####0";
 
 
                 }
@@ -126,8 +126,27 @@
                     newRow["masv"] = txtMaSV.Text;
                     newRow["nienkhoa"] = dataGridView1.Rows[i].Cells[0].Value;
                     newRow["hocky"] = dataGridView1.Rows[i].Cells[1].Value;
-                    newRow["hocphi"] = dataGridView1.Rows[i].Cells[2].Value;
-                    newRow["SOTIENDADONG"] = dataGridView1.Rows[i].Cells[3].Value;
+                    int hocphi = int.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
+                    if(hocphi < 0 || hocphi > 8000000)
+                    {                     
+                        MessageBox.Show("Học phí từ 0 VND đến 8.000.000 VND !! Vui lòng kiểm tra lại ");
+                        return;
+                    }
+                    else
+                    {
+                        newRow["hocphi"] = dataGridView1.Rows[i].Cells[2].Value;
+                    }
+                    int sotiendadong = int.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
+                    if(sotiendadong == hocphi || sotiendadong == 0)
+                    {
+                         newRow["SOTIENDADONG"] = dataGridView1.Rows[i].Cells[3].Value;
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("Số tiền đã đóng phải bằng học phí hoặc bằng 0 VNĐ !! Vui lòng kiểm tra lại ");
+                        return;
+                    }                
                     ds.Tables["BANGHP"].Rows.Add(newRow);
                 }
 
@@ -146,25 +165,10 @@
         {
             this.Close();
         }
-        private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
-            if (dataGridView1.CurrentCell.ColumnIndex == 3) //Desired Column
-            {
-                TextBox tb = e.Control as TextBox;
-                if (tb != null)
-                {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
-                }
-            }
-        }
 
-        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            MessageBox.Show("- Dữ liệu nhập vào bị lỗi vui lòng kiểm tra lại !! \n" + "- " + e.Context.ToString());
         }
     }
 }

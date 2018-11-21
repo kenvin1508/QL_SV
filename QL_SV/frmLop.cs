@@ -101,9 +101,6 @@ namespace QL_SV
                     maKhoa = ((DataRowView)bdsLop[0])["MAKH"].ToString();
                 }
             }
-               
-           
-
         }
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {

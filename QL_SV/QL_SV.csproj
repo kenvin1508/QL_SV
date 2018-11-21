@@ -376,16 +376,22 @@
   <ItemGroup>
     <Content Include="Image\icons8_Book_40px.png" />
     <Content Include="Image\icons8_Circled_Play_24px_3.png" />
+    <Content Include="Image\icons8_Elective_25px.png" />
     <Content Include="Image\icons8_Graduation_Cap_24px.png" />
+    <Content Include="Image\icons8_Graduation_Cap_25px_2.png" />
+    <Content Include="Image\icons8_Money_25px.png" />
     <Content Include="Image\icons8_Money_Bag_24px.png" />
     <Content Include="Image\icons8_Play_24px.png" />
     <Content Include="Image\icons8_Play_40px.png" />
     <Content Include="Image\icons8_Plus_24px.png" />
     <Content Include="Image\icons8_Plus_24px_2.png" />
+    <Content Include="Image\icons8_Rating_25px.png" />
+    <Content Include="Image\icons8_Report_Card_25px.png" />
     <Content Include="Image\icons8_School_32px.png" />
     <Content Include="Image\icons8_School_40px.png" />
     <Content Include="Image\icons8_Shutdown_24px_1.png" />
     <Content Include="Image\icons8_Spam_48px.png" />
+    <Content Include="Image\icons8_Student_Male_24px.png" />
     <Content Include="Image\icons8_Student_Male_40px.png" />
   </ItemGroup>
   <ItemGroup />

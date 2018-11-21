@@ -119,7 +119,10 @@
             this.fieldHOTEN1.Caption = "Mã sinh viên - Họ tên";
             this.fieldHOTEN1.FieldName = "HOTEN";
             this.fieldHOTEN1.Name = "fieldHOTEN1";
+            this.fieldHOTEN1.Options.AllowSort = DevExpress.Utils.DefaultBoolean.False;
+            this.fieldHOTEN1.Options.AllowSortBySummary = DevExpress.Utils.DefaultBoolean.False;
             this.fieldHOTEN1.Options.ShowInFilter = true;
+            this.fieldHOTEN1.SortMode = DevExpress.XtraPivotGrid.PivotSortMode.None;
             this.fieldHOTEN1.Width = 200;
             // 
             // fieldTENMH1

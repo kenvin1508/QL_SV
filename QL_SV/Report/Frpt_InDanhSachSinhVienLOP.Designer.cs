@@ -40,6 +40,8 @@
             this.lOPTableAdapter = new QL_SV.DSTableAdapters.LOPTableAdapter();
             this.panel1 = new System.Windows.Forms.Panel();
             this.documentViewer1 = new DevExpress.XtraPrinting.Preview.DocumentViewer();
+            this.cmbKhoa = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bdsLOP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DS)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,7 +62,7 @@
             // btnThoat
             // 
             this.btnThoat.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThoat.Location = new System.Drawing.Point(290, 137);
+            this.btnThoat.Location = new System.Drawing.Point(290, 170);
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.Size = new System.Drawing.Size(75, 34);
             this.btnThoat.TabIndex = 4;
@@ -71,7 +73,7 @@
             // btnIn
             // 
             this.btnIn.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnIn.Location = new System.Drawing.Point(166, 137);
+            this.btnIn.Location = new System.Drawing.Point(166, 170);
             this.btnIn.Name = "btnIn";
             this.btnIn.Size = new System.Drawing.Size(79, 34);
             this.btnIn.TabIndex = 3;
@@ -83,7 +85,7 @@
             // 
             this.txtMaLop.Enabled = false;
             this.txtMaLop.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMaLop.Location = new System.Drawing.Point(398, 106);
+            this.txtMaLop.Location = new System.Drawing.Point(398, 139);
             this.txtMaLop.Name = "txtMaLop";
             this.txtMaLop.Size = new System.Drawing.Size(97, 27);
             this.txtMaLop.TabIndex = 2;
@@ -95,7 +97,7 @@
             this.cmbTenLop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTenLop.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTenLop.FormattingEnabled = true;
-            this.cmbTenLop.Location = new System.Drawing.Point(69, 72);
+            this.cmbTenLop.Location = new System.Drawing.Point(69, 105);
             this.cmbTenLop.Name = "cmbTenLop";
             this.cmbTenLop.Size = new System.Drawing.Size(426, 27);
             this.cmbTenLop.TabIndex = 1;
@@ -116,7 +118,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(2, 75);
+            this.label2.Location = new System.Drawing.Point(2, 108);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 19);
             this.label2.TabIndex = 0;
@@ -129,6 +131,8 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.cmbKhoa);
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.btnIn);
             this.panel1.Controls.Add(this.txtMaLop);
             this.panel1.Controls.Add(this.label1);
@@ -137,7 +141,7 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(6, 178);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(505, 187);
+            this.panel1.Size = new System.Drawing.Size(505, 217);
             this.panel1.TabIndex = 5;
             // 
             // documentViewer1
@@ -148,6 +152,27 @@
             this.documentViewer1.Name = "documentViewer1";
             this.documentViewer1.Size = new System.Drawing.Size(842, 545);
             this.documentViewer1.TabIndex = 6;
+            // 
+            // cmbKhoa
+            // 
+            this.cmbKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbKhoa.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbKhoa.FormattingEnabled = true;
+            this.cmbKhoa.Location = new System.Drawing.Point(69, 66);
+            this.cmbKhoa.Name = "cmbKhoa";
+            this.cmbKhoa.Size = new System.Drawing.Size(198, 27);
+            this.cmbKhoa.TabIndex = 13;
+            this.cmbKhoa.SelectedIndexChanged += new System.EventHandler(this.cmbKhoa_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 69);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 19);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Khoa";
             // 
             // Frpt_InDanhSachSinhVienLOP
             // 
@@ -181,5 +206,7 @@
         private DSTableAdapters.LOPTableAdapter lOPTableAdapter;
         private System.Windows.Forms.Panel panel1;
         private DevExpress.XtraPrinting.Preview.DocumentViewer documentViewer1;
+        private System.Windows.Forms.ComboBox cmbKhoa;
+        private System.Windows.Forms.Label label3;
     }
 }

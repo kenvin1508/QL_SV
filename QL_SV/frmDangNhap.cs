@@ -83,7 +83,7 @@ namespace QL_SV
             {
                 Program.frmChinh.unEnableButton();// Không cho phòng kế toán làm việc với lớp, điểm,...
                 Program.frmChinh.btnHocPhi.Enabled = true;
-                Program.frmChinh.btnDSDongHP.Enabled = true;
+                Program.frmChinh.btnInDSDongHP.Enabled = true;
             }
             this.Enabled = false;
         }
@@ -107,6 +107,15 @@ namespace QL_SV
             txtLoginName.Text = "HUY_CNTT";
             txtPassword.Text = "123";
             btnDangNhap_Click(sender,e);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // MessageBox.Show("ĐÃ NÓI KHÔNG ĐƯỢC CLICK MÀ !!!!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            cbbTenKhoa.SelectedIndex = 1;
+            txtLoginName.Text = "A_HP";
+            txtPassword.Text = "123";
+            btnDangNhap_Click(sender, e);
         }
     }
 }

@@ -123,9 +123,39 @@ namespace QL_SV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Elective_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Elective_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_Graduation_Cap_24px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Graduation_Cap_24px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Graduation_Cap_25px_2 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Graduation_Cap_25px_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Money_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Money_25px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,6 +213,26 @@ namespace QL_SV.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_Rating_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Rating_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Report_Card_25px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Report_Card_25px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_School_32px {
             get {
                 object obj = ResourceManager.GetObject("icons8_School_32px", resourceCulture);
@@ -216,6 +266,16 @@ namespace QL_SV.Properties {
         internal static System.Drawing.Bitmap icons8_Spam_48px {
             get {
                 object obj = ResourceManager.GetObject("icons8_Spam_48px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_Student_Male_24px {
+            get {
+                object obj = ResourceManager.GetObject("icons8_Student_Male_24px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

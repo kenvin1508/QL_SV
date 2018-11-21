@@ -83,12 +83,20 @@ namespace QL_SV
 
         private void btnDangXuat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            // Kiểm tra nếu form nào đang tồn tại thì tắt
             Form frmDN = this.CheckExists(typeof(frmDangNhap));
             Form frmDiem = this.CheckExists(typeof(frmDiem));
-            Form frmMonHoc = this.CheckExists(typeof(frmMonHoc));
+            Form frmHocPhi = this.CheckExists(typeof(frmHocPhi));
             Form frmLop = this.CheckExists(typeof(frmLop));
+            Form frmMonHoc = this.CheckExists(typeof(frmMonHoc));         
             Form frmSV = this.CheckExists(typeof(frmSinhVien));
             Form frmTaoLogin = this.CheckExists(typeof(frmTaoLogin));
+            Form Frpt_BangDiemMonHoc = this.CheckExists(typeof(Report.Frpt_BangDiemMonHoc));
+            Form Frpt_BangDiemTongKet = this.CheckExists(typeof(Report.Frpt_BangDiemTongKet));
+            Form Frpt_DanhSachDongHP = this.CheckExists(typeof(Report.Frpt_DanhSachDongHP));
+            Form Frpt_DsThiHetMon = this.CheckExists(typeof(Report.Frpt_DsThiHetMon));
+            Form Frpt_InDanhSachSinhVienLOP = this.CheckExists(typeof(Report.Frpt_InDanhSachSinhVienLOP));
+            Form Frpt_PhieuDiemSV = this.CheckExists(typeof(Report.Frpt_PhieuDiemSV));
             if (frmDN != null)
             {
                 frmDN.Close();
@@ -106,6 +114,10 @@ namespace QL_SV
             {
                 frmDiem.Close();
             }
+            if(frmHocPhi != null)
+            {
+                frmHocPhi.Close();
+            }
             if (frmMonHoc != null)
             {
                 frmMonHoc.Close();
@@ -117,11 +129,35 @@ namespace QL_SV
             if (frmSV != null)
             {
                 frmSV.Close();
-            };
+            }
             if (frmTaoLogin != null)
             {
                 frmTaoLogin.Close();
-            };
+            }
+            if (Frpt_BangDiemMonHoc != null)
+            {
+                Frpt_BangDiemMonHoc.Close();
+            }
+            if (Frpt_BangDiemTongKet != null)
+            {
+                Frpt_BangDiemTongKet.Close();
+            }
+            if (Frpt_DanhSachDongHP != null)
+            {
+                Frpt_DanhSachDongHP.Close();
+            }
+            if (Frpt_DsThiHetMon != null)
+            {
+                Frpt_DsThiHetMon.Close();
+            }
+            if (Frpt_InDanhSachSinhVienLOP != null)
+            {
+                Frpt_InDanhSachSinhVienLOP.Close();
+            }
+            if (Frpt_PhieuDiemSV != null)
+            {
+                Frpt_PhieuDiemSV.Close();
+            }
         }
         public void unEnableButton()
         {
@@ -130,7 +166,20 @@ namespace QL_SV
             btnMonHoc.Enabled = false;
             btnSinhVien.Enabled = false;
             btnHocPhi.Enabled = false;
-            btnDSDongHP.Enabled = false;
+            btnInDSDongHP.Enabled = false;
+            btnInBDMonHoc.Enabled = false;
+            btnInBDTongKet.Enabled = false;
+            btnInDSSV.Enabled = false;
+            btnInDSThiHetMon.Enabled = false;
+            btnInPhieuDiemSV.Enabled = false;
+        }
+        private void enableButtonReport()
+        {
+            btnInBDMonHoc.Enabled = true;
+            btnInBDTongKet.Enabled = true;
+            btnInDSSV.Enabled = true;
+            btnInDSThiHetMon.Enabled = true;
+            btnInPhieuDiemSV.Enabled = true;
         }
 
         private void btnTaoLogin_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

@@ -21,27 +21,19 @@ namespace QL_SV.Report
         private void Frpt_PhieuDiemSV_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false;
-            this.dIEMTableAdapter.Fill(this.DS.DIEM);        
+            this.dIEMTableAdapter.Connection.ConnectionString = Program.connstr;
+            this.dIEMTableAdapter.Fill(this.DS.DIEM);
+            cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
+            cmbKhoa.DisplayMember = "TENCN";
+            cmbKhoa.ValueMember = "TENSERVER";
+            cmbKhoa.SelectedIndex = Program.mKhoa;
             if (Program.mGroup == "PGV")
             {
-                Program.servername = @"VTN\VTN";
-                Program.mlogin = Program.remotelogin;
-                Program.password = Program.remotepassword;
+                cmbKhoa.Enabled = true;  // bật tắt theo phân quyền
             }
-            if (Program.mGroup == "KHOA" && Program.mKhoa == 0)
-            {
-                Program.servername = @"VTN\VTN1";
-            }
-            if (Program.mGroup == "KHOA" && Program.mKhoa == 2)
-            {
-                Program.servername = @"VTN\VTN2";
-            }
-            if (Program.KetNoi() == 0)
-                MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
             else
             {
-                this.dIEMTableAdapter.Connection.ConnectionString = Program.connstr;
-                this.dIEMTableAdapter.Fill(this.DS.DIEM);
+                cmbKhoa.Enabled = false;
             }
         }
         private void btnIn_Click(object sender, EventArgs e)
@@ -67,7 +59,7 @@ namespace QL_SV.Report
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Không tìm thấy dữ liệu, xem lại mã sinh viên đã nhập \n " +ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                MessageBox.Show("- Không tìm thấy dữ liệu, xem lại mã sinh viên đã nhập \n - Hoặc sinh viên đã nghỉ học \n" +ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 Program.myReader.Close();
             }
 
@@ -84,6 +76,41 @@ namespace QL_SV.Report
             this.Validate();
             this.bdsDIEM.EndEdit();
             this.tableAdapterManager.UpdateAll(this.DS);
+
+        }
+
+        private void cmbKhoa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbKhoa.SelectedValue != null)
+            {
+                if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
+                    return; // Hệ thống chưa chọn đã chạy => Kết thúc
+                Program.servername = cmbKhoa.SelectedValue.ToString();
+                if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
+                {
+                    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
+                    cmbKhoa.SelectedIndex = 1;
+                    cmbKhoa.SelectedIndex = 0;
+                    return;
+                }
+                if (cmbKhoa.SelectedIndex != Program.mKhoa)
+                {
+                    Program.mlogin = Program.remotelogin;
+                    Program.password = Program.remotepassword;
+                }
+                else
+                {
+                    Program.mlogin = Program.mloginDN;
+                    Program.password = Program.passwordDN;
+                }
+                if (Program.KetNoi() == 0)
+                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
+                else
+                {
+                    this.dIEMTableAdapter.Connection.ConnectionString = Program.connstr;
+                    this.dIEMTableAdapter.Fill(this.DS.DIEM);
+                }
+            }
 
         }
     }
