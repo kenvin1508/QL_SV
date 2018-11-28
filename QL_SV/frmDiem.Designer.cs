@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDiem));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.bar2 = new DevExpress.XtraBars.Bar();
@@ -131,7 +132,6 @@
             this.bar2.FloatLocation = new System.Drawing.Point(272, 161);
             this.bar2.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnBatDau, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
-            new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnHieuChinh, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnGhi, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnTaiLai, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph),
             new DevExpress.XtraBars.LinkPersistInfo(DevExpress.XtraBars.BarLinkUserDefines.PaintStyle, this.btnThoat, DevExpress.XtraBars.BarItemPaintStyle.CaptionGlyph)});
@@ -143,7 +143,7 @@
             // 
             this.btnBatDau.Caption = "Bắt đầu";
             this.btnBatDau.Id = 1;
-            this.btnBatDau.ImageOptions.Image = global::QL_SV.Properties.Resources.icons8_Circled_Play_24px_3;
+            this.btnBatDau.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnBatDau.ImageOptions.Image")));
             this.btnBatDau.Name = "btnBatDau";
             this.btnBatDau.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnBatDau_ItemClick);
             // 
@@ -151,15 +151,15 @@
             // 
             this.btnHieuChinh.Caption = "Hiệu chỉnh";
             this.btnHieuChinh.Id = 13;
-            this.btnHieuChinh.ImageOptions.Image = global::QL_SV.Properties.Resources.Text_Edit_icon_24;
+            this.btnHieuChinh.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnHieuChinh.ImageOptions.Image")));
             this.btnHieuChinh.Name = "btnHieuChinh";
-            this.btnHieuChinh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHieuChinh_ItemClick);
+            this.btnHieuChinh.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnHieChinh_ItemClick);
             // 
             // btnGhi
             // 
             this.btnGhi.Caption = "Ghi";
             this.btnGhi.Id = 8;
-            this.btnGhi.ImageOptions.Image = global::QL_SV.Properties.Resources.Save_icon_241;
+            this.btnGhi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnGhi.ImageOptions.Image")));
             this.btnGhi.Name = "btnGhi";
             this.btnGhi.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnGhi_ItemClick);
             // 
@@ -167,7 +167,7 @@
             // 
             this.btnTaiLai.Caption = "Tải lại";
             this.btnTaiLai.Id = 9;
-            this.btnTaiLai.ImageOptions.Image = global::QL_SV.Properties.Resources.Button_Refresh_icon_24;
+            this.btnTaiLai.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnTaiLai.ImageOptions.Image")));
             this.btnTaiLai.Name = "btnTaiLai";
             this.btnTaiLai.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnTaiLai_ItemClick);
             // 
@@ -175,7 +175,7 @@
             // 
             this.btnThoat.Caption = "Thoát";
             this.btnThoat.Id = 10;
-            this.btnThoat.ImageOptions.Image = global::QL_SV.Properties.Resources.Exit_24_icon;
+            this.btnThoat.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnThoat.ImageOptions.Image")));
             this.btnThoat.Name = "btnThoat";
             this.btnThoat.ItemClick += new DevExpress.XtraBars.ItemClickEventHandler(this.btnThoat_ItemClick);
             // 
@@ -234,21 +234,21 @@
             // 
             this.btnXoa.Caption = "Xóa";
             this.btnXoa.Id = 3;
-            this.btnXoa.ImageOptions.Image = global::QL_SV.Properties.Resources.Delete_2_icon_24;
+            this.btnXoa.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnXoa.ImageOptions.Image")));
             this.btnXoa.Name = "btnXoa";
             // 
             // btnPhucHoi
             // 
             this.btnPhucHoi.Caption = "Phục hồi";
             this.btnPhucHoi.Id = 4;
-            this.btnPhucHoi.ImageOptions.Image = global::QL_SV.Properties.Resources.Undo_icon_24;
+            this.btnPhucHoi.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("btnPhucHoi.ImageOptions.Image")));
             this.btnPhucHoi.Name = "btnPhucHoi";
             // 
             // barButtonItem2
             // 
             this.barButtonItem2.Caption = "Ghi";
             this.barButtonItem2.Id = 6;
-            this.barButtonItem2.ImageOptions.Image = global::QL_SV.Properties.Resources.Save_icon_24;
+            this.barButtonItem2.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barButtonItem2.ImageOptions.Image")));
             this.barButtonItem2.Name = "barButtonItem2";
             // 
             // barButtonItem3
@@ -262,7 +262,7 @@
             this.barEditItem1.Caption = "barEditItem1";
             this.barEditItem1.Edit = this.repositoryItemTextEdit1;
             this.barEditItem1.Id = 12;
-            this.barEditItem1.ImageOptions.Image = global::QL_SV.Properties.Resources.Text_Edit_icon_24;
+            this.barEditItem1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("barEditItem1.ImageOptions.Image")));
             this.barEditItem1.Name = "barEditItem1";
             // 
             // repositoryItemTextEdit1
@@ -357,14 +357,14 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dataGridView1.Location = new System.Drawing.Point(0, 116);
             this.dataGridView1.Name = "dataGridView1";

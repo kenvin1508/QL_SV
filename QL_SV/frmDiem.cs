@@ -7,8 +7,6 @@
 
     public partial class frmDiem : Form
     {
-        public bool kt = false;
-
         public frmDiem()
         {
             InitializeComponent();
@@ -127,7 +125,6 @@
 
         private void btnBatDau_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            kt = false; 
             if (cmbMaLop.Text == "" || cmbMaMon.Text == "" || cmbLanThi.SelectedIndex == -1)
             {
                 MessageBox.Show("Mã lớp hoặc mã môn hoặc lần thi bị trống");
@@ -150,21 +147,9 @@
 
                     cmd.ExecuteNonQuery();
                     int check = (int)cmd.Parameters["return_value"].Value;
-                    if (check == -1)
-                    {
-                        MessageBox.Show("- Đã nhập điểm LẦN 1 \n- Muốn sửa điểm vui lòng vào phần HIỆU CHỈNH ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        con.Close();
-                        return;
-                    }
                     if (check == 1)
                     {
                         MessageBox.Show("- Lớp không có sinh viên ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        con.Close();
-                        return;
-                    }
-                    if (check == -2)
-                    {
-                        MessageBox.Show("- Đã nhập điểm LẦN 2 \n- Muốn sửa điểm vui lòng vào phần HIỆU CHỈNH ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         con.Close();
                         return;
                     }
@@ -186,69 +171,66 @@
                     dataGridView1.Columns[0].ReadOnly = true;
                     dataGridView1.Columns[1].HeaderText = "Họ tên";
                     dataGridView1.Columns[1].ReadOnly = true;
-                    dataGridView1.Columns.Add("DIEM", "Điểm");
+                    dataGridView1.Columns[2].HeaderText = "Điểm";
                 }
             }
             btnGhi.Enabled = true;
             btnBatDau.Enabled = groupBox1.Enabled = cmbKhoa.Enabled = btnHieuChinh.Enabled = false;
         }
 
-        private void btnHieuChinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
-        {
-            kt = true; // set btn GHI là HIỆU CHỈNH
-            if (cmbMaLop.Text == "" || cmbMaMon.Text == "" || cmbLanThi.SelectedIndex == -1)
-            {
-                MessageBox.Show("Mã lớp hoặc mã môn hoặc lần thi bị trống");
-                return;
-            }
+        //private void btnHieuChinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        //{
+        //    if (cmbMaLop.Text == "" || cmbMaMon.Text == "" || cmbLanThi.SelectedIndex == -1)
+        //    {
+        //        MessageBox.Show("Mã lớp hoặc mã môn hoặc lần thi bị trống");
+        //        return;
+        //    }
 
-            using (SqlConnection con = new SqlConnection(Program.connstr))
-            {
-                using (SqlCommand cmd = new SqlCommand("sp_GetValueTableDiem"))
-                {
-                    cmd.Connection = con;
-                    con.Open();
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.Add("@MALOP", SqlDbType.Char, 8).Value = cmbMaLop.Text;
-                    cmd.Parameters.Add("@MAMH", SqlDbType.Char, 6).Value = cmbMaMon.Text;
-                    cmd.Parameters.Add("@LAN", SqlDbType.SmallInt).Value = cmbLanThi.SelectedItem;
-                    SqlParameter prmt = new SqlParameter();
-                    prmt = cmd.Parameters.Add("RETURN_VALUE", SqlDbType.Int);
-                    prmt.Direction = ParameterDirection.ReturnValue;
+        //    using (SqlConnection con = new SqlConnection(Program.connstr))
+        //    {
+        //        using (SqlCommand cmd = new SqlCommand("sp_GetValueTableDiem"))
+        //        {
+        //            cmd.Connection = con;
+        //            con.Open();
+        //            cmd.CommandType = CommandType.StoredProcedure;
+        //            cmd.Parameters.Add("@MALOP", SqlDbType.Char, 8).Value = cmbMaLop.Text;
+        //            cmd.Parameters.Add("@MAMH", SqlDbType.Char, 6).Value = cmbMaMon.Text;
+        //            cmd.Parameters.Add("@LAN", SqlDbType.SmallInt).Value = cmbLanThi.SelectedItem;
+        //            SqlParameter prmt = new SqlParameter();
+        //            prmt = cmd.Parameters.Add("RETURN_VALUE", SqlDbType.Int);
+        //            prmt.Direction = ParameterDirection.ReturnValue;
 
-                    cmd.ExecuteNonQuery();
-                    int check = (int)cmd.Parameters["return_value"].Value;
-                    if (check == 1)
-                    {
-                        MessageBox.Show("Lớp không có sinh viên có điểm \n\n ");
-                        con.Close();
-                        return;
-                    }
+        //            cmd.ExecuteNonQuery();
+        //            int check = (int)cmd.Parameters["return_value"].Value;
+        //            if (check == 1)
+        //            {
+        //                MessageBox.Show("Lớp không có sinh viên có điểm \n\n ");
+        //                con.Close();
+        //                return;
+        //            }
 
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "TableDiem");
+        //            SqlDataAdapter da = new SqlDataAdapter(cmd);
+        //            DataSet ds = new DataSet();
+        //            da.Fill(ds, "TableDiem");
 
-                    con.Close();
-                    dataGridView1.AutoGenerateColumns = true; // hiển thị các cột tương ứng với các trường dữ liệu có sẵn
-                    dataGridView1.DataSource = ds;
-                    dataGridView1.DataMember = "TableDiem";
-                    dataGridView1.Columns[0].HeaderText = "Mã sinh viên - Họ và tên";
-                    dataGridView1.Columns[0].ReadOnly = true;
-                    dataGridView1.Columns[1].HeaderText = "Mã môn học";
-                    dataGridView1.Columns[1].ReadOnly = true;
-                    dataGridView1.Columns[2].HeaderText = "Lần";
-                    dataGridView1.Columns[2].ReadOnly = true;
-                    dataGridView1.Columns[3].HeaderText = "Điểm";
-                }
-            }
-            btnBatDau.Enabled = groupBox1.Enabled = btnHieuChinh.Enabled = cmbKhoa.Enabled = false;
-            btnGhi.Enabled = true;
-        }
+        //            con.Close();
+        //            dataGridView1.AutoGenerateColumns = true; // hiển thị các cột tương ứng với các trường dữ liệu có sẵn
+        //            dataGridView1.DataSource = ds;
+        //            dataGridView1.DataMember = "TableDiem";
+        //            dataGridView1.Columns[0].HeaderText = "Mã sinh viên - Họ và tên";
+        //            dataGridView1.Columns[0].ReadOnly = true;
+        //            dataGridView1.Columns[1].HeaderText = "Mã môn học";
+        //            dataGridView1.Columns[1].ReadOnly = true;
+        //            dataGridView1.Columns[2].HeaderText = "Lần";
+        //            dataGridView1.Columns[2].ReadOnly = true;
+        //            dataGridView1.Columns[3].HeaderText = "Điểm";
+        //        }
+        //    }
+        //    btnBatDau.Enabled = groupBox1.Enabled = btnHieuChinh.Enabled = cmbKhoa.Enabled = false;
+        //    btnGhi.Enabled = true;
+        //}
         private void btnGhi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (kt == false) // ghi mới
-            {
                 using (SqlConnection con = new SqlConnection(Program.connstr))
                 {
                     con.Open();
@@ -292,50 +274,49 @@
                     dataGridView1.DataSource = null;
                     dataGridView1.Columns.Clear();
                     con.Close();
-                }
-            }
-            if (kt == true) // Hiệu chỉnh
-            {
-                using (SqlConnection con = new SqlConnection(Program.connstr))
-                {
-                    con.Open();
-                    SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
-                    da.InsertCommand = new SqlCommand("sp_UpdateValueTableDiem", con);
-                    da.InsertCommand.CommandType = CommandType.StoredProcedure;
+                }        
+            //if (kt == true) // Hiệu chỉnh
+            //{
+            //    using (SqlConnection con = new SqlConnection(Program.connstr))
+            //    {
+            //        con.Open();
+            //        SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM DIEM where masv='000'", con);
+            //        da.InsertCommand = new SqlCommand("sp_UpdateValueTableDiem", con);
+            //        da.InsertCommand.CommandType = CommandType.StoredProcedure;
 
-                    da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
-                    da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
-                    da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
-                    da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
+            //        da.InsertCommand.Parameters.Add("@MASV", SqlDbType.Char, 12, "masv");
+            //        da.InsertCommand.Parameters.Add("@MAMH", SqlDbType.Char, 6, "mamh");
+            //        da.InsertCommand.Parameters.Add("@LAN", SqlDbType.SmallInt, 1, "lan");
+            //        da.InsertCommand.Parameters.Add("@DIEM", SqlDbType.Float, 8, "diem");
 
-                    DataSet ds = new DataSet();
-                    da.Fill(ds, "BANGDIEM");
-                    for (int i = 0; i < dataGridView1.Rows.Count; i++)
-                    {
-                        dataGridView1.EndEdit();
-                        DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
-                        newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
-                        newRow["mamh"] = cmbMaMon.Text;
-                        newRow["lan"] = cmbLanThi.SelectedItem;
-                        float f = float.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
-                        if (f>=0 && f<=10)
-                        {
-                            newRow["diem"] = dataGridView1.Rows[i].Cells[3].Value;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Điểm chỉ từ 0 đến 10 !! Vui lòng kiểm tra lại ");
-                            return;
-                        }
-                        ds.Tables["BANGDIEM"].Rows.Add(newRow);
-                    }
-                    da.Update(ds, "BANGDIEM");
-                    //xóa table dataGridView1 
-                    dataGridView1.DataSource = null;
-                    dataGridView1.Columns.Clear();
-                    con.Close();
-                }
-            }
+            //        DataSet ds = new DataSet();
+            //        da.Fill(ds, "BANGDIEM");
+            //        for (int i = 0; i < dataGridView1.Rows.Count; i++)
+            //        {
+            //            dataGridView1.EndEdit();
+            //            DataRow newRow = ds.Tables["BANGDIEM"].NewRow();
+            //            newRow["masv"] = dataGridView1.Rows[i].Cells[0].Value.ToString();
+            //            newRow["mamh"] = cmbMaMon.Text;
+            //            newRow["lan"] = cmbLanThi.SelectedItem;
+            //            float f = float.Parse(dataGridView1.Rows[i].Cells[3].Value.ToString());
+            //            if (f>=0 && f<=10)
+            //            {
+            //                newRow["diem"] = dataGridView1.Rows[i].Cells[3].Value;
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Điểm chỉ từ 0 đến 10 !! Vui lòng kiểm tra lại ");
+            //                return;
+            //            }
+            //            ds.Tables["BANGDIEM"].Rows.Add(newRow);
+            //        }
+            //        da.Update(ds, "BANGDIEM");
+            //        //xóa table dataGridView1 
+            //        dataGridView1.DataSource = null;
+            //        dataGridView1.Columns.Clear();
+            //        con.Close();
+            //    }
+            //}
             btnGhi.Enabled = false;
             btnBatDau.Enabled = groupBox1.Enabled = cmbKhoa.Enabled = btnHieuChinh.Enabled = true;
         }
@@ -353,6 +334,11 @@
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show("- Điểm nhập vào bị lỗi vui lòng kiểm tra lại !! \n" +"- " +e.Context.ToString());     
+        }
+
+        private void btnHieChinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+
         }
     }
 }

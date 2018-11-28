@@ -16,6 +16,7 @@
         {
             btnGhi.Enabled = false;
             btnTaiLai.Enabled = false;
+            
         }
 
         private void btnBatDau_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -124,7 +125,15 @@
                     dataGridView1.EndEdit();
                     DataRow newRow = ds.Tables["BANGHP"].NewRow();
                     newRow["masv"] = txtMaSV.Text;
-                    newRow["nienkhoa"] = dataGridView1.Rows[i].Cells[0].Value;
+                    if (IsSchoolYearFormat(dataGridView1.Rows[i].Cells[0].Value.ToString()) == false)
+                    {
+                        MessageBox.Show("- Kiểm tra lại niên khóa vừa nhập !!! \n - Ví dụ đúng : 2010-2014 ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        return;
+                    }
+                    else
+                    {
+                        newRow["nienkhoa"] = dataGridView1.Rows[i].Cells[0].Value;
+                    }
                     newRow["hocky"] = dataGridView1.Rows[i].Cells[1].Value;
                     int hocphi = int.Parse(dataGridView1.Rows[i].Cells[2].Value.ToString());
                     if(hocphi < 0 || hocphi > 8000000)
@@ -146,7 +155,7 @@
                     {
                         MessageBox.Show("Số tiền đã đóng phải bằng học phí hoặc bằng 0 VNĐ !! Vui lòng kiểm tra lại ");
                         return;
-                    }                
+                    }
                     ds.Tables["BANGHP"].Rows.Add(newRow);
                 }
 
@@ -159,6 +168,10 @@
             btnGhi.Enabled = false;
             btnBatDau.Enabled = true;
             groupBox1.Enabled = true;
+            txtHoTen.Text = "";
+            txtMaLop.Text = "";
+            txtMaSV.Text = "";
+            txtMaSV.Enabled = true;
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
@@ -169,6 +182,24 @@
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
             MessageBox.Show("- Dữ liệu nhập vào bị lỗi vui lòng kiểm tra lại !! \n" + "- " + e.Context.ToString());
+        }
+        private bool IsSchoolYearFormat(string schoolYear)
+        {
+            String[] splitWord = schoolYear.Trim().Split('-');
+            int yearOne, yearTwo;
+            if(splitWord.Length != 2) // kiểm tra định dạng phải là (2010-2014)
+            {
+                return false; 
+            }
+            if(!int.TryParse(splitWord[0],out yearOne)) // kiểm tra năm đầu phải là số, gán yearOne = năm đầu
+            {
+                return false;
+            }
+            if (!int.TryParse(splitWord[1], out yearTwo)) // kiểm tra năm hai phải là số, gán yearTwo = năm sau
+            {
+                return false;
+            }
+            return yearTwo - 4 == yearOne && yearTwo > 1900 && yearOne > 1900 && yearTwo > yearOne; // Kiểm tra 1 sinh viên học tối đa 4 năm , năm sau phải lớn hơn năm đầu
         }
     }
 }

@@ -204,7 +204,7 @@
             this.btnDontClick.Name = "btnDontClick";
             this.btnDontClick.Size = new System.Drawing.Size(238, 60);
             this.btnDontClick.TabIndex = 3;
-            this.btnDontClick.Text = "DON\'T CLICK";
+            this.btnDontClick.Text = "DO NOT CLICK";
             this.btnDontClick.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDontClick.UseVisualStyleBackColor = false;
             this.btnDontClick.Click += new System.EventHandler(this.btnDontClick_Click);
