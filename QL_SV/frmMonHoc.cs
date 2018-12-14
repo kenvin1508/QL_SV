@@ -33,7 +33,7 @@ namespace QL_SV
         {
             DS.EnforceConstraints = false;// tắt ràng buộc khóa ngoại
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
-            DS.EnforceConstraints = false; // yêu cầu không kiểm tra khóa ngoại nữa 
+ 
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
             //MessageBox.Show("" + bdsDiem.Count);
@@ -122,7 +122,6 @@ namespace QL_SV
                 txtTenMonHoc.Focus();
                 return;
             }
-            MessageBox.Show(""+kt);
             if (kt == false)
             {
                 using (SqlConnection con = new SqlConnection(Program.connstr))

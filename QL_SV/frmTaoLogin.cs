@@ -22,7 +22,9 @@ namespace QL_SV
         {
             
             DS.EnforceConstraints = false; // tắt ràng buộc khóa ngoại
+            this.GIANGVIEN1TableAdapter.Connection.ConnectionString = Program.connstr;
             this.GIANGVIEN1TableAdapter.Fill(this.DS.GIANGVIEN1);
+           
             cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbKhoa.DisplayMember = "TENCN";
             cmbKhoa.ValueMember = "TENSERVER";
@@ -34,19 +36,7 @@ namespace QL_SV
             }
             else
             {
-                //set lại dữ liệu khi không là PGV
                 cmbKhoa.Enabled = false;              
-                Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.KetNoi() == 0)
-                    MessageBox.Show("Lỗi kết nối về chi nhánh mới", "", MessageBoxButtons.OK);
-                else
-                {
-                    this.GIANGVIEN1TableAdapter.Connection.ConnectionString = Program.connstr;
-                    this.GIANGVIEN1TableAdapter.Fill(this.DS.GIANGVIEN1);
-                    cmbMaGV.DataSource = bdsGV1;  // sao chép bds_dspm đã load ở form đăng nhập  qua
-                    cmbMaGV.DisplayMember = "TEN";
-                    cmbMaGV.ValueMember = "MAGV";
-                }
             }
             if (Program.mGroup == "KHOA")
             {

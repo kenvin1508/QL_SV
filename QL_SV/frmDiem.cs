@@ -338,7 +338,6 @@
 
         private void btnHieChinh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-
         }
     }
 }

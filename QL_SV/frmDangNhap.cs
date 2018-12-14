@@ -22,7 +22,7 @@ namespace QL_SV
         private void frmDangNhap_Load(object sender, EventArgs e)
         {
             this.v_DS_PHANMANHTableAdapter.Fill(this.qL_SVDataSet.V_DS_PHANMANH);
-            cbbTenKhoa.SelectedIndex = 1;
+            cbbTenKhoa.SelectedIndex =1;
             cbbTenKhoa.SelectedIndex = 0;
         }
 
@@ -102,16 +102,14 @@ namespace QL_SV
         }
 
         private void btnDontClick_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("ĐÃ NÓI KHÔNG ĐƯỢC CLICK MÀ !!!!","ERRO",MessageBoxButtons.OK,MessageBoxIcon.Error);
+        {          
             txtLoginName.Text = "HUY_CNTT";
             txtPassword.Text = "123";
             btnDangNhap_Click(sender,e);
         }
 
         private void button1_Click(object sender, EventArgs e)
-        {
-            // MessageBox.Show("ĐÃ NÓI KHÔNG ĐƯỢC CLICK MÀ !!!!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        {          
             cbbTenKhoa.SelectedIndex = 1;
             txtLoginName.Text = "A_HP";
             txtPassword.Text = "123";
