@@ -75,13 +75,13 @@ namespace QL_SV
                 if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView")
                    return; // Hệ thống chưa chọn đã chạy => Kết thúc
                 Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
-                {
-                    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
-                    cmbKhoa.SelectedIndex = 1;
-                    cmbKhoa.SelectedIndex = 0;
-                    return;
-                }
+                //if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
+                //{
+                //    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
+                //    cmbKhoa.SelectedIndex = 1;
+                //    cmbKhoa.SelectedIndex = 0;
+                //    return;
+                //}
                 if (cmbKhoa.SelectedIndex != Program.mKhoa)
                 {
                     Program.mlogin = Program.remotelogin;
@@ -105,8 +105,8 @@ namespace QL_SV
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsLop.Position;
-            groupBox1.Enabled = true;
             bdsLop.AddNew();
+            groupBox1.Enabled = true;     
             txtMaLop.Focus();
             txtMaKhoa.Text = maKhoa;
             kt = false; 
@@ -128,21 +128,11 @@ namespace QL_SV
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-           String malop = "";
-            //if (bdsSV.Count > 0)
-            //{
-            //    MessageBox.Show("K hông thể xóa lớp này vì đã có sinh viên", "",
-            //           MessageBoxButtons.OK);
-            //    return;
-            //}
-            if (MessageBox.Show("Bạn có thật sự muốn xóa lớp này ?? ", "Xác nhận",
+                if (MessageBox.Show("Bạn có thật sự muốn xóa lớp này ?? ", "Xác nhận",
                        MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
                 {
-                    malop = ((DataRowView)bdsLop[bdsLop.Position])["MALOP"].ToString();// giữ lại để khi xóa bị lỗi thì ta sẽ quay về lại
-                    bdsLop.Position = bdsLop.Find("MALOP", malop);
-                    MessageBox.Show(bdsLop.Position+" ");
                     bdsLop.RemoveCurrent();
                     this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;       
                     this.lOPTableAdapter.Update(this.DS.LOP);            
@@ -150,10 +140,8 @@ namespace QL_SV
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lớp đã có sinh viên không thể xóa \n" + ex.Message, "",
-                        MessageBoxButtons.OK);
+                    MessageBox.Show("Lớp đã có sinh viên không thể xóa !!! \n\n" + ex.Message, "",MessageBoxButtons.OK);
                     this.lOPTableAdapter.Fill(this.DS.LOP);
-                    bdsLop.Position = bdsLop.Find("MALOP", malop);
                     return;
                 }
             }
@@ -164,8 +152,10 @@ namespace QL_SV
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsLop.CancelEdit();
+            this.lOPTableAdapter.Fill(this.DS.LOP);
             if (btnThem.Enabled == false) bdsLop.Position = vitri;
             groupBox1.Enabled = false;
+            cmbKhoa.Enabled = true;
             btnThem.Enabled = btnHieuChinh.Enabled = btnXoa.Enabled = btnTaiLai.Enabled = btnThoat.Enabled = true;
             btnGhi.Enabled = btnPhucHoi.Enabled = false;
         }
@@ -219,6 +209,7 @@ namespace QL_SV
                 bdsLop.ResetCurrentItem();
                 this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.lOPTableAdapter.Update(this.DS.LOP);
+                this.lOPTableAdapter.Fill(this.DS.LOP);
                 cmbKhoa.Enabled = true;
 
             }

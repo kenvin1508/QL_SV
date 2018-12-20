@@ -26,17 +26,14 @@ namespace QL_SV
             this.Validate();
             this.bdsMonHoc.EndEdit();
             this.tableAdapterManager.UpdateAll(this.DS);
-
         }
 
         private void frmMonHoc_Load(object sender, EventArgs e)
         {
             DS.EnforceConstraints = false;// tắt ràng buộc khóa ngoại
-            this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
- 
             this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
             this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
-            //MessageBox.Show("" + bdsDiem.Count);
+            this.dIEMTableAdapter.Fill(this.DS.DIEM);
             if (Program.mGroup == "KHOA" || Program.mGroup == "USER")
             {
                 btnThem.Enabled = false;
@@ -53,8 +50,8 @@ namespace QL_SV
         private void btnThem_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             vitri = bdsMonHoc.Position;
-            groupBox1.Enabled = true;
             bdsMonHoc.AddNew();
+            groupBox1.Enabled = true;          
             txtMaMonHoc.Focus();
             kt = false;
             btnThem.Enabled = btnHieuChinh.Enabled = btnXoa.Enabled = btnTaiLai.Enabled = false;
@@ -73,35 +70,33 @@ namespace QL_SV
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            String malop = "";
             if (MessageBox.Show("Bạn có thật sự muốn xóa môn học này ?? ", "Xác nhận",
                        MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
                 {
-                    malop = ((DataRowView)bdsMonHoc[bdsMonHoc.Position])["MAMH"].ToString();// giữ lại để khi xóa bị lỗi thì ta sẽ quay về lại
-                    bdsMonHoc.Position = bdsMonHoc.Find("MAMH", malop);
                     bdsMonHoc.RemoveCurrent(); // xóa tại chỗ 
                     this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.MONHOCTableAdapter.Update(this.DS.MONHOC); // ghi vào CSDL
+                    this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi xóa nhân viên. Bạn hãy xóa lại\n" + ex.Message, "",
-                        MessageBoxButtons.OK);
+                    MessageBox.Show("Sinh viên đã có điểm môn học này !!! \n\n" + ex.Message, "", MessageBoxButtons.OK);
                     this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
-                    bdsMonHoc.Position = bdsMonHoc.Find("MAMH", malop);
                     return;
                 }
             }
 
             if (bdsMonHoc.Count == 0) btnXoa.Enabled = false;
+
         }
 
         private void btnPhucHoi_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
             bdsMonHoc.CancelEdit();
+            this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
             if (btnThem.Enabled == false) bdsMonHoc.Position = vitri;
             groupBox1.Enabled = false;
             btnThem.Enabled = btnHieuChinh.Enabled = btnXoa.Enabled = btnTaiLai.Enabled = btnThoat.Enabled = true;
@@ -150,6 +145,7 @@ namespace QL_SV
                 bdsMonHoc.ResetCurrentItem();
                 this.MONHOCTableAdapter.Connection.ConnectionString = Program.connstr;
                 this.MONHOCTableAdapter.Update(this.DS.MONHOC);
+                this.MONHOCTableAdapter.Fill(this.DS.MONHOC);
 
             }
             catch (Exception ex)

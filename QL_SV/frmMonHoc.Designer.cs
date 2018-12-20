@@ -278,6 +278,7 @@
             // 
             this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
             this.tableAdapterManager.DIEMTableAdapter = null;
+            this.tableAdapterManager.GIANGVIEN1TableAdapter = null;
             this.tableAdapterManager.GIANGVIENTableAdapter = null;
             this.tableAdapterManager.HOCPHITableAdapter = null;
             this.tableAdapterManager.KHOATableAdapter = null;
@@ -294,7 +295,7 @@
             this.mONHOCGridControl.MainView = this.gridView1;
             this.mONHOCGridControl.MenuManager = this.barManager2;
             this.mONHOCGridControl.Name = "mONHOCGridControl";
-            this.mONHOCGridControl.Size = new System.Drawing.Size(800, 161);
+            this.mONHOCGridControl.Size = new System.Drawing.Size(800, 242);
             this.mONHOCGridControl.TabIndex = 8;
             this.mONHOCGridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -332,9 +333,9 @@
             this.groupBox1.Controls.Add(mAMHLabel);
             this.groupBox1.Controls.Add(this.txtMaMonHoc);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 222);
+            this.groupBox1.Location = new System.Drawing.Point(0, 303);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(800, 205);
+            this.groupBox1.Size = new System.Drawing.Size(800, 124);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "THÔNG TIN";

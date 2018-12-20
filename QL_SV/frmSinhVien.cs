@@ -35,12 +35,16 @@ namespace QL_SV
 
         private void frmSinhVien_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'DS.DIEM' table. You can move, or remove it, as needed.
+            
             DS.EnforceConstraints = false; // tắt ràng buộc khóa ngoại
             reloadLopAndSV();
+           
             cmbKhoa.DataSource = Program.bds_dspm;  // sao chép bds_dspm đã load ở form đăng nhập  qua
             cmbKhoa.DisplayMember = "TENCN";
             cmbKhoa.ValueMember = "TENSERVER";
             cmbKhoa.SelectedIndex = Program.mKhoa;
+            
             if (Program.mGroup == "PGV")
             {
                 cmbKhoa.Enabled = true;  // bật tắt theo phân quyền
@@ -61,13 +65,13 @@ namespace QL_SV
             {
                 if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView") return; // Hệ thống chưa chọn đã chạy => Kết thúc
                 Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
-                {
-                    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
-                    cmbKhoa.SelectedIndex = 1;
-                    cmbKhoa.SelectedIndex = 0;
-                    return;
-                }
+                //if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
+                //{
+                //    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
+                //    cmbKhoa.SelectedIndex = 1;
+                //    cmbKhoa.SelectedIndex = 0;
+                //    return;
+                //}
                 if (cmbKhoa.SelectedIndex != Program.mKhoa)
                 {
                     Program.mlogin = Program.remotelogin;
@@ -88,6 +92,7 @@ namespace QL_SV
                     cmbMaLop.ValueMember = "MALOP";
                 }
             }
+            cmbMaLop_SelectedIndexChanged(sender, e);
         }
 
         private void cmbMaLop_SelectedIndexChanged(object sender, EventArgs e)
@@ -221,7 +226,7 @@ namespace QL_SV
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi ghi lớp.\n" + ex.Message, "", MessageBoxButtons.OK);
+                MessageBox.Show("Lỗi ghi sinh viên !!! \n" + ex.Message, "", MessageBoxButtons.OK);
                 return;
             }
             btnThem.Enabled = btnHieuChinh.Enabled = btnXoa.Enabled = btnTaiLai.Enabled = cmbMaLop.Enabled = true;
@@ -248,14 +253,11 @@ namespace QL_SV
 
         private void btnXoa_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            String masv = "";
             if (MessageBox.Show("Bạn có thật sự muốn xóa sinh viên này ?? ", "Xác nhận",
                      MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
                 try
                 {
-                    masv = ((DataRowView)bdsSINHVIEN[bdsSINHVIEN.Position])["MASV"].ToString();// giữ lại để khi xóa bị lỗi thì ta sẽ quay về lại
-                    bdsSINHVIEN.Position = bdsSINHVIEN.Find("MASV", masv);
                     bdsSINHVIEN.RemoveCurrent();
                     this.sINHVIENTableAdapter.Connection.ConnectionString = Program.connstr;
                     this.sINHVIENTableAdapter.Update(this.DS.SINHVIEN);
@@ -263,10 +265,8 @@ namespace QL_SV
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi xóa nhân viên. Bạn hãy xóa lại\n" + ex.Message, "",
-                        MessageBoxButtons.OK);
+                    MessageBox.Show("Lỗi xóa nhân viên. Bạn hãy xóa lại\n" + ex.Message, "",MessageBoxButtons.OK);
                     this.lOPTableAdapter.Fill(this.DS.LOP);
-                    bdsSINHVIEN.Position = bdsSINHVIEN.Find("MASV", bdsSINHVIEN);
                     return;
                 }
             }
@@ -313,6 +313,7 @@ namespace QL_SV
             this.lOPTableAdapter.Connection.ConnectionString = Program.connstr;
             this.sINHVIENTableAdapter.Fill(this.DS.SINHVIEN);
             this.lOPTableAdapter.Fill(this.DS.LOP);
+            this.dIEMTableAdapter.Fill(this.DS.DIEM);
         }
         bool IsWordsOnly(string str)
         {

@@ -47,6 +47,7 @@ namespace QL_SV
             if (Program.KetNoi() == 0) return;
             Program.mKhoa = cbbTenKhoa.SelectedIndex;
             Program.bds_dspm = bdsDSPhanManh;
+            Program.bds_dspm.Filter = string.Format("TENCN  NOT LIKE 'HỌC PHÍ'");
 
             Program.mloginDN = Program.mlogin;
             Program.passwordDN = Program.password;

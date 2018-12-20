@@ -53,13 +53,13 @@
             {
                 if (cmbKhoa.SelectedValue.ToString() == "System.Data.DataRowView") return; // Hệ thống chưa chọn đã chạy => Kết thúc
                 Program.servername = cmbKhoa.SelectedValue.ToString();
-                if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
-                {
-                    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
-                    cmbKhoa.SelectedIndex = 1;
-                    cmbKhoa.SelectedIndex = 0;
-                    return;
-                }
+                //if (Program.mGroup == "PGV" && cmbKhoa.SelectedIndex == 1)
+                //{
+                //    MessageBox.Show("Bạn không có quyền truy cập cái này", "", MessageBoxButtons.OK);
+                //    cmbKhoa.SelectedIndex = 1;
+                //    cmbKhoa.SelectedIndex = 0;
+                //    return;
+                //}
                 if (cmbKhoa.SelectedIndex != Program.mKhoa)
                 {
                     Program.mlogin = Program.remotelogin;
@@ -82,6 +82,8 @@
                     clearTextBox();
                 }
             }
+            cmbMaLop_SelectedIndexChanged(sender, e);
+            cmbMaMon_SelectedIndexChanged(sender, e);
         }
 
         private void btnThoat_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
